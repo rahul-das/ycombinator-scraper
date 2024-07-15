@@ -1,0 +1,52 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    base64 (0.2.0)
+    childprocess (4.1.0)
+    csv (3.3.0)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
+    json (2.7.2)
+    mini_mime (1.1.5)
+    mini_portile2 (2.8.7)
+    multi_xml (0.6.0)
+    mustermann (3.0.0)
+      ruby2_keywords (~> 0.0.1)
+    nokogiri (1.13.10)
+      mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
+    racc (1.8.0)
+    rack (2.2.9)
+    rack-protection (3.2.0)
+      base64 (>= 0.1.0)
+      rack (~> 2.2, >= 2.2.4)
+    rexml (3.3.1)
+      strscan
+    ruby2_keywords (0.0.5)
+    rubyzip (2.3.2)
+    selenium-webdriver (4.1.0)
+      childprocess (>= 0.5, < 5.0)
+      rexml (~> 3.2, >= 3.2.5)
+      rubyzip (>= 1.2.2)
+    sinatra (3.2.0)
+      mustermann (~> 3.0)
+      rack (~> 2.2, >= 2.2.4)
+      rack-protection (= 3.2.0)
+      tilt (~> 2.0)
+    strscan (3.1.0)
+    tilt (2.4.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  csv
+  httparty
+  json
+  nokogiri
+  selenium-webdriver
+  sinatra
+
+BUNDLED WITH
+   1.17.2
