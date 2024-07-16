@@ -56,8 +56,7 @@ The live API is deployed at `http://54.91.165.230:4567/scrape`.
    - **Content-Type**: `application/json`
    - **Request Body Examples**:
 
-#### Example 1: Scraping 10 companies without filters
-
+   #### Example 1: Scraping 10 companies without filters
    ```sh
    curl --location 'http://54.91.165.230:4567/scrape' \
    --header 'Content-Type: application/json' \
@@ -66,9 +65,7 @@ The live API is deployed at `http://54.91.165.230:4567/scrape`.
        "filters": {}
    }'
    ```
-
    **Response Example**:
-
    ```json
    {
        "status": "success",
@@ -76,8 +73,7 @@ The live API is deployed at `http://54.91.165.230:4567/scrape`.
    }
    ```
 
-#### Example 2: Scraping 10 healthcare companies from S21 batch in the USA
-
+   #### Example 2: Scraping 10 healthcare companies from S21 batch in the USA
    ```sh
    curl --location 'http://54.91.165.230:4567/scrape' \
    --header 'Content-Type: application/json' \
@@ -96,9 +92,7 @@ The live API is deployed at `http://54.91.165.230:4567/scrape`.
        }
    }'
    ```
-
    **Response Example**:
-
    ```json
    {
        "status": "success",
