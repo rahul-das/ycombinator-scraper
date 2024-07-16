@@ -55,50 +55,49 @@ The live API is deployed at `http://54.91.165.230:4567/scrape`.
    - **Method**: `POST`
    - **Content-Type**: `application/json`
    - **Request Body Examples**:
+    #### Example 1: Scraping 10 companies without filters
+    ```sh
+    curl --location 'http://54.91.165.230:4567/scrape' \
+    --header 'Content-Type: application/json' \
+    --data '{
+        "n": 10,
+        "filters": {}
+    }'
+    ```
+    **Response Example**:
+    ```json
+    {
+        "status": "success",
+        "csv": "name,location,description,batch,website,founders,linkedin_urls\nAirbnb,\"San Francisco, CA, USA\",Book accommodations around the world.,W09,http://airbnb.com,\"Brian Chesky, CEO, Nathan Blecharczyk, CTO, Joe Gebbia, CPO\",\"https://www.linkedin.com/in/brianchesky/, https://www.linkedin.com/in/blecharczyk/, https://www.linkedin.com/in/jgebbia/\"\n..."
+    }
+    ```
 
-   #### Example 1: Scraping 10 companies without filters
-   ```sh
-   curl --location 'http://54.91.165.230:4567/scrape' \
-   --header 'Content-Type: application/json' \
-   --data '{
-       "n": 10,
-       "filters": {}
-   }'
-   ```
-   **Response Example**:
-   ```json
-   {
-       "status": "success",
-       "csv": "name,location,description,batch,website,founders,linkedin_urls\nAirbnb,\"San Francisco, CA, USA\",Book accommodations around the world.,W09,http://airbnb.com,\"Brian Chesky, CEO, Nathan Blecharczyk, CTO, Joe Gebbia, CPO\",\"https://www.linkedin.com/in/brianchesky/, https://www.linkedin.com/in/blecharczyk/, https://www.linkedin.com/in/jgebbia/\"\n..."
-   }
-   ```
-
-   #### Example 2: Scraping 10 healthcare companies from S21 batch in the USA
-   ```sh
-   curl --location 'http://54.91.165.230:4567/scrape' \
-   --header 'Content-Type: application/json' \
-   --data '{
-       "n": 10,
-       "filters": {
-           "batch": "S21",
-           "industry": "Healthcare",
-           "region": "United States of America",
-           "company_size": "1-10",
-           "is_hiring": true,
-           "nonprofit": false,
-           "black_founded": true,
-           "hispanic_latino_founded": false,
-           "women_founded": true
-       }
-   }'
-   ```
-   **Response Example**:
-   ```json
-   {
-       "status": "success",
-       "csv": "name,location,description,batch,website,founders,linkedin_urls\nAgapé,\"Rochester, NY, USA\",\"Feel close, even when apart. One meaningful conversation at a time.\",S21,https://www.getdailyagape.com,\"Kadie Okwudili, Ron Rogge\",https://www.linkedin.com/in/khadeshaokwudili\n"
-   }
-   ```
+    #### Example 2: Scraping 10 healthcare companies from S21 batch in the USA
+    ```sh
+    curl --location 'http://54.91.165.230:4567/scrape' \
+    --header 'Content-Type: application/json' \
+    --data '{
+        "n": 10,
+        "filters": {
+            "batch": "S21",
+            "industry": "Healthcare",
+            "region": "United States of America",
+            "company_size": "1-10",
+            "is_hiring": true,
+            "nonprofit": false,
+            "black_founded": true,
+            "hispanic_latino_founded": false,
+            "women_founded": true
+        }
+    }'
+    ```
+    **Response Example**:
+    ```json
+    {
+        "status": "success",
+        "csv": "name,location,description,batch,website,founders,linkedin_urls\nAgapé,\"Rochester, NY, USA\",\"Feel close, even when apart. One meaningful conversation at a time.\",S21,https://www.getdailyagape.com,\"Kadie Okwudili, Ron Rogge\",https://www.linkedin.com/in/khadeshaokwudili\n"
+    }
+    ```
 
 ### Filters
 
