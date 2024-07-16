@@ -1,7 +1,3 @@
-Here is a detailed README for your GitHub repository based on the provided files:
-
----
-
 # Y Combinator Scraper API
 
 This repository contains a web scraping API to extract data from Y Combinator's publicly listed companies. The API allows users to scrape a specified number of companies and filter results based on various criteria such as batch, industry, region, and founder demographics.
@@ -25,23 +21,30 @@ This repository contains a web scraping API to extract data from Y Combinator's 
 ### Setup
 
 1. **Clone the repository**:
+
     ```sh
-    git clone https://github.com/rahul-das/y-combinator-scraper.git
-    cd y-combinator-scraper
+    git clone https://github.com/rahul-das/ycombinator-scraper.git
+    cd ycombinator-scraper
     ```
 
 2. **Install dependencies**:
+
     ```sh
     bundle install
     ```
 
 3. **Run the Sinatra server**:
+
     ```sh
     ruby app.rb
     ```
 
 4. **Access the API**:
     Open your browser or use a tool like `curl` or Postman to interact with the API at `http://localhost:4567`.
+
+## Live API
+
+The live API is deployed at `http://54.91.165.230:4567/scrape`.
 
 ## Usage
 
@@ -51,26 +54,62 @@ This repository contains a web scraping API to extract data from Y Combinator's 
    - **Endpoint**: `/scrape`
    - **Method**: `POST`
    - **Content-Type**: `application/json`
-   - **Request Body**:
-     ```json
-     {
+   - **Request Body Examples**:
+
+#### Example 1: Scraping 10 companies without filters
+
+   ```sh
+   curl --location 'http://54.91.165.230:4567/scrape' \
+   --header 'Content-Type: application/json' \
+   --data '{
+       "n": 10,
+       "filters": {}
+   }'
+   ```
+
+   **Response Example**:
+
+   ```json
+   {
+       "status": "success",
+       "csv": "name,location,description,batch,website,founders,linkedin_urls\nAirbnb,\"San Francisco, CA, USA\",Book accommodations around the world.,W09,http://airbnb.com,\"Brian Chesky, CEO, Nathan Blecharczyk, CTO, Joe Gebbia, CPO\",\"https://www.linkedin.com/in/brianchesky/, https://www.linkedin.com/in/blecharczyk/, https://www.linkedin.com/in/jgebbia/\"\n..."
+   }
+   ```
+
+#### Example 2: Scraping 10 healthcare companies from S21 batch in the USA
+
+   ```sh
+   curl --location 'http://54.91.165.230:4567/scrape' \
+   --header 'Content-Type: application/json' \
+   --data '{
        "n": 10,
        "filters": {
-         "batch": "W21",
-         "industry": "Healthcare",
-         "region": "United States",
-         "company_size": "1-10",
-         "is_hiring": true,
-         "nonprofit": false,
-         "black_founded": true,
-         "women_founded": true
+           "batch": "S21",
+           "industry": "Healthcare",
+           "region": "United States of America",
+           "company_size": "1-10",
+           "is_hiring": true,
+           "nonprofit": false,
+           "black_founded": true,
+           "hispanic_latino_founded": false,
+           "women_founded": true
        }
-     }
-     ```
+   }'
+   ```
+
+   **Response Example**:
+
+   ```json
+   {
+       "status": "success",
+       "csv": "name,location,description,batch,website,founders,linkedin_urls\nAgapé,\"Rochester, NY, USA\",\"Feel close, even when apart. One meaningful conversation at a time.\",S21,https://www.getdailyagape.com,\"Kadie Okwudili, Ron Rogge\",https://www.linkedin.com/in/khadeshaokwudili\n"
+   }
+   ```
 
 ### Filters
 
 The API supports the following filters:
+
 - `batch`: The Y Combinator batch (e.g., W21, S21).
 - `industry`: The industry of the companies.
 - `region`: The region where the companies are located.
@@ -113,6 +152,7 @@ curl -X POST http://localhost:4567/scrape \
 ### CSV Output
 
 The API returns a CSV string containing the scraped data, which includes the following columns:
+
 - `name`: The company name.
 - `location`: The company location.
 - `description`: A short description of the company.
@@ -121,36 +161,14 @@ The API returns a CSV string containing the scraped data, which includes the fol
 - `founders`: Names of the company founders.
 - `linkedin_urls`: LinkedIn URLs of the founders.
 
-## Deployment
-
-To deploy the API on an EC2 instance:
-
-1. **Launch an EC2 instance** with an appropriate Amazon Machine Image (AMI).
-2. **Install Ruby**, Bundler, Google Chrome, and ChromeDriver on the instance.
-3. **Clone the repository** and install dependencies.
-4. **Run the Sinatra server**.
-5. **Allow external access** by configuring the EC2 security group to allow inbound traffic on port 4567.
-
-## Sample Output
-
-A sample output for `n = 120` companies with applied filters is available in the [output.csv](output.csv) file.
-
 ## Repository Content
 
 - **`app.rb`**: Sinatra application file.
 - **`scraper.rb`**: Contains the scraping logic.
+- **`api.rb`**: Contains the API endpoints and csv conversion logic.
 - **`Gemfile`**: Lists required gems.
 - **`Gemfile.lock`**: Lock file for gems.
-- **`output.csv`**: Sample output file with 120 companies.
-
-## License
-
-This project is licensed under the MIT License.
 
 ## Contact
 
-For any inquiries or support, please contact [your-email@example.com](mailto:your-email@example.com).
-
----
-
-Feel free to modify any sections as needed for your specific requirements and context.
+For any inquiries or support, please contact [rahul.kr.das.27@gmail.com](mailto:rahul.kr.das.27@gmail.com).
