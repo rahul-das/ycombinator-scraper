@@ -2,22 +2,21 @@
 
 require 'selenium-webdriver'
 require 'nokogiri'
-require 'csv'
 require 'httparty'
+require 'uri'
 
 class YCombinatorScraper
   BASE_URL = 'https://www.ycombinator.com/companies'
 
   def initialize(n, filters)
     @n = n
-    @url = generate_url(filters)
-    @options = Selenium::WebDriver::Chrome::Options.new(args: ['headless'])
+    @url = filters.empty? ? BASE_URL : generate_url(filters)
+    @options = Selenium::WebDriver::Chrome::Options.new
+    @options.add_argument('--headless')
     @driver = Selenium::WebDriver.for(:chrome, options: @options)
   end
 
   def generate_url(filters)
-    return BASE_URL if filters.empty?
-
     mapped_params = {
       'batch' => filters['batch'],
       'industry' => filters['industry'],

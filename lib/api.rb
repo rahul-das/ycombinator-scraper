@@ -18,7 +18,11 @@ class YCombinatorScraperApp < Sinatra::Base
   post '/scrape' do
     content_type :json
     request.body.rewind
-    data = JSON.parse(request.body.read)
+    begin
+      data = JSON.parse(request.body.read)
+    rescue JSON::ParserError
+      return { status: 'error', message: 'Invalid JSON' }.to_json
+    end
 
     n = data['n']
     filters = data['filters'] || {}
@@ -46,5 +50,5 @@ class YCombinatorScraperApp < Sinatra::Base
     { status: 'success', csv: csv_string }.to_json
   end
 
-  run! if app_file == $0
+  run! if app_file == $PROGRAM_NAME
 end
